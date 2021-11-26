@@ -10,7 +10,7 @@ class NotificationPage extends StatelessWidget {
         title: const Text('Notif Screen'),
       ),
       body: const Center(
-        child: Text('Anggap aa ini halaman notifikasi'),
+        child: Text('Anggap aja ini halaman notifikasi'),
       ),
     );
   }

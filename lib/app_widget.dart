@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // handle when on click and on foreground notification
+    // handle when on click and on terminated notification
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         final routeName = message.data['route'];
@@ -24,9 +24,9 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    // handle when on click and on foreground notification
+    // handle when on click and on background notification
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('ziannnnn');
+      print(message.notification!.title);
     });
 
     // handle when on foreground notification
