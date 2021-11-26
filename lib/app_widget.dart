@@ -4,6 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fcm/pages/home_page.dart';
 import 'package:flutter_fcm/pages/notification_page.dart';
+import 'package:get/get.dart';
+import 'package:flutter_inapp_notifications/flutter_inapp_notifications.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -34,7 +36,22 @@ class _MyAppState extends State<MyApp> {
       print(message);
 
       if (message.notification != null) {
-        print(message.notification!.title);
+        InAppNotifications.show(
+            title: message.notification!.title,
+            leading: const Icon(
+              Icons.fact_check,
+              color: Colors.green,
+              size: 50,
+            ),
+            duration: const Duration(seconds: 15),
+            ending: const Icon(
+              Icons.arrow_right_alt,
+              color: Colors.red,
+            ),
+            description: message.notification!.body,
+            onTap: () {
+              Get.to<void>(() => const NotificationPage());
+            });
       }
     });
     super.initState();
@@ -42,7 +59,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       routes: {
         '/notif-page': (_) => const NotificationPage(),
@@ -51,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(title: 'Flutter Demo Home Page'),
+      builder: InAppNotifications.init(),
     );
   }
 }
