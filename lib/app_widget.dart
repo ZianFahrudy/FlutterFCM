@@ -17,6 +17,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    FirebaseMessaging.instance.getToken().then((value) => print(value));
+
     // handle when on click and on terminated notification
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
